@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "name": "FFA-Common",
+  "id": "ffa-common",
+  "version": "${version}",
+  "description": "FFA-Common",
+  "authors": [
+    "NoRiskk",
+    "Freshkenny",
+    "BestAuto"
+  ],
+  "icon": "assets/ffa-common/icon.png",
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "gg.norisk.ffa.FFACommon"
+      }
+    ]
+  },
+  "mixins": [
+    "ffa-common.mixins.json"
+  ],
+  "depends": {
+    "java": ">=17",
+    "minecraft": "*",
+    "fabric": "*",
+    "fabric-language-kotlin": "*"
+  }
+}

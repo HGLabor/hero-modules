@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "name": "FFA Client",
+  "id": "ffa-client",
+  "version": "${version}",
+  "description": "FFA-Client",
+  "authors": [
+    "NoRiskk",
+    "Freshkenny",
+    "BestAuto"
+  ],
+  "icon": "assets/ffa-client/icon.png",
+  "license": "ARR",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "gg.norisk.ffa.client.FFAClient"
+      }
+    ]
+  },
+  "mixins": [
+    "ffa-client.mixins.json"
+  ],
+  "depends": {
+    "java": ">=17",
+    "minecraft": "*",
+    "fabric": "*",
+    "fabric-language-kotlin": "*"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "name": "FFA-Server",
+  "id": "ffa-server",
+  "version": "${version}",
+  "description": "FFA-Server",
+  "authors": [
+    "NoRiskk",
+    "Freshkenny",
+    "BestAuto"
+  ],
+  "icon": "assets/ffa-server/icon.png",
+  "license": "ARR",
+  "environment": "server",
+  "entrypoints": {
+    "server": [
+      {
+        "adapter": "kotlin",
+        "value": "gg.norisk.ffa.server.FFAServer"
+      }
+    ]
+  },
+  "mixins": [
+    "ffa-server.mixins.json"
+  ],
+  "depends": {
+    "java": ">=17",
+    "minecraft": "*",
+    "fabric": "*",
+    "fabric-language-kotlin": "*"
+  }
+}

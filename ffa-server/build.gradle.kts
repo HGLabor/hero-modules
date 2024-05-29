@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     include(implementation(project(":ffa-common", configuration = "namedElements"))!!)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     modImplementation("com.sk89q.worldedit:worldedit-fabric-mc1.20.4:7.3.0") // Ändere die Versionsnummer entsprechend der gewünschten Version
 }
 

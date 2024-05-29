@@ -2,16 +2,18 @@ package gg.norisk.ffa.client.selector.ui.components
 
 import gg.norisk.ffa.Heroes
 import gg.norisk.ffa.client.selector.ui.HeroSelectorScreen
+import gg.norisk.ffa.network.dto.HeroWrapper
 import gg.norisk.ffa.network.selectorHeroPacket
 import io.wispforest.owo.ui.component.Components
 import io.wispforest.owo.ui.container.Containers
 import io.wispforest.owo.ui.container.FlowLayout
 import io.wispforest.owo.ui.core.*
 import io.wispforest.owo.ui.util.UISounds
+import net.minecraft.util.Identifier
 import net.silkmc.silk.core.text.literal
 
 class HeroListComponent(
-    val heroes: List<Heroes>,
+    val heroes: List<HeroWrapper>,
     val heroSelectorScreen: HeroSelectorScreen,
     horizontalSizing: Sizing = Sizing.content(),
     verticalSizing: Sizing = Sizing.content()
@@ -38,7 +40,7 @@ class HeroListComponent(
         grid.padding(Insets.of(5))
 
         val lockInButton = Components.button("LOCK IN".literal) {
-            selectorHeroPacket.send(heroSelectorScreen.hero)
+            selectorHeroPacket.send(heroSelectorScreen.hero.name)
         }
         lockInButton.horizontalSizing(Sizing.fixed(100))
 
@@ -46,7 +48,7 @@ class HeroListComponent(
     }
 
     inner class HeroHeadComponent(
-        val hero: Heroes,
+        val hero: HeroWrapper,
         horizontalSizing: Sizing = Sizing.content(),
         verticalSizing: Sizing = Sizing.content()
     ) : FlowLayout(
@@ -57,7 +59,7 @@ class HeroListComponent(
         init {
             val l = 8
             val m = 8
-            val heroHead = Components.texture(hero.skin, 8, l, 8, m, 64, 64)
+            val heroHead = Components.texture(Identifier(hero.icon), 0, 0, 0, 0, 228, 228)
             //val heroHead2 = Components.texture(hero.skin, 40, l, 8, m, 64, 64)
             //OVERLAY
             heroHead.sizing(Sizing.fixed(32))

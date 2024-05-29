@@ -5,6 +5,7 @@ plugins {
     fabric
     kotlin
     silk
+    kotlin("plugin.serialization")
 }
 
 version = "1.0.0"
@@ -15,6 +16,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }
 
 tasks {

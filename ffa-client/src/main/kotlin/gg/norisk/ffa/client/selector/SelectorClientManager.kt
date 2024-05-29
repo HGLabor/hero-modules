@@ -11,9 +11,10 @@ import net.silkmc.silk.core.task.mcCoroutineTask
 
 object SelectorClientManager {
     fun initClient() {
-        selectorScreenPacket.receiveOnClient { _, _ ->
+        selectorScreenPacket.receiveOnClient { heroes, _ ->
             mcCoroutineTask(sync = true, client = true) {
-                MinecraftClient.getInstance().setScreen(HeroSelectorScreen())
+                println("Heroes: $heroes")
+                MinecraftClient.getInstance().setScreen(HeroSelectorScreen(heroes))
             }
         }
         EntityEvents.onTrackedDataSetEvent.listen { event ->

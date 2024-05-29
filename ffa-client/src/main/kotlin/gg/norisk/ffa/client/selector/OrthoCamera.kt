@@ -25,7 +25,7 @@ object OrthoCamera : ClientTickEvents.EndTick {
             clientCommand("hero") {
                 runs {
                     mcCoroutineTask(delay = 1.ticks, sync = true, client = true) {
-                        MinecraftClient.getInstance().setScreen(HeroSelectorScreen())
+                        //MinecraftClient.getInstance().setScreen(HeroSelectorScreen())
                     }
                 }
             }

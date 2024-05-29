@@ -1,4 +1,4 @@
-rootProject.name = "hero-module"
+rootProject.name = "hero-modules"
 
 pluginManagement {
     repositories {

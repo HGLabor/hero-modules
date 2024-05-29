@@ -3,14 +3,15 @@ package gg.norisk.ffa.client.selector.ui
 import gg.norisk.ffa.Heroes
 import gg.norisk.ffa.client.selector.ui.components.HeroInfoComponent
 import gg.norisk.ffa.client.selector.ui.components.HeroListComponent
+import gg.norisk.ffa.network.dto.HeroWrapper
 import io.wispforest.owo.ui.base.BaseOwoScreen
 import io.wispforest.owo.ui.container.Containers
 import io.wispforest.owo.ui.container.FlowLayout
 import io.wispforest.owo.ui.core.OwoUIAdapter
 import io.wispforest.owo.ui.core.Positioning
 
-class HeroSelectorScreen : BaseOwoScreen<FlowLayout>() {
-    var hero = Heroes.entries.first()
+class HeroSelectorScreen(val heroes: List<HeroWrapper>) : BaseOwoScreen<FlowLayout>() {
+    var hero = heroes.first()
         set(value) {
             field = value
             heroInfoComponent.remove()
@@ -24,7 +25,7 @@ class HeroSelectorScreen : BaseOwoScreen<FlowLayout>() {
     }
 
     override fun build(root: FlowLayout) {
-        val heroList = HeroListComponent(Heroes.entries, this)
+        val heroList = HeroListComponent(heroes, this)
         heroList.positioning(Positioning.relative(50, 90))
 
         root.child(heroList)

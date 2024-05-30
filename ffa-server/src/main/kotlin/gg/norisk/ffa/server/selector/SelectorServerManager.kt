@@ -1,6 +1,5 @@
 package gg.norisk.ffa.server.selector
 
-import gg.norisk.ffa.network.dto.HeroWrapper
 import gg.norisk.ffa.network.isFFA
 import gg.norisk.ffa.network.selectorHeroPacket
 import gg.norisk.ffa.network.selectorScreenPacket
@@ -49,9 +48,7 @@ object SelectorServerManager : ServerEntityEvents.Load {
         this.health = this.maxHealth
         isFFA = false
         changeGameMode(GameMode.SPECTATOR)
-        selectorScreenPacket.send(HeroManager.registeredHeroes.map {
-            HeroWrapper(it.key, it.value.icon.toString())
-        }, this)
+        selectorScreenPacket.send(HeroManager.registeredHeroes.keys.toList(), this)
         val spawn = server.overworld.getCenter().toCenterPos()
         this.teleport(server.overworld, spawn.x, spawn.y, spawn.z, 0f, 0f)
     }

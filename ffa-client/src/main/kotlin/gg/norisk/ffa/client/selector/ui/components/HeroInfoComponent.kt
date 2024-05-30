@@ -1,9 +1,8 @@
 package gg.norisk.ffa.client.selector.ui.components
 
 import com.thedeanda.lorem.LoremIpsum
-import gg.norisk.ffa.Heroes
-import gg.norisk.ffa.network.dto.HeroWrapper
 import gg.norisk.ffa.utils.ChatUtils
+import gg.norisk.heroes.common.hero.Hero
 import io.wispforest.owo.ui.component.Components
 import io.wispforest.owo.ui.container.Containers
 import io.wispforest.owo.ui.container.FlowLayout
@@ -22,7 +21,7 @@ import java.awt.Color
 import kotlin.random.Random
 
 class HeroInfoComponent(
-    val hero: HeroWrapper,
+    val hero: Hero<*>,
     horizontalSizing: Sizing = Sizing.content(),
     verticalSizing: Sizing = Sizing.content()
 ) : FlowLayout(
@@ -100,7 +99,7 @@ class HeroInfoComponent(
     }
 
     private class HeroAbilityDescriptionComponent(
-        val hero: HeroWrapper,
+        val hero: Hero<*>,
         horizontalSizing: Sizing = Sizing.content(),
         verticalSizing: Sizing = Sizing.content()
     ) : FlowLayout(

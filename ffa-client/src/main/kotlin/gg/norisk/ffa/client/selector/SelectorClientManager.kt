@@ -5,15 +5,20 @@ import gg.norisk.ffa.event.EntityEvents
 import gg.norisk.ffa.network.ffaTracker
 import gg.norisk.ffa.network.isFFA
 import gg.norisk.ffa.network.selectorScreenPacket
+import gg.norisk.heroes.common.hero.HeroManager
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.player.PlayerEntity
 import net.silkmc.silk.core.task.mcCoroutineTask
 
 object SelectorClientManager {
     fun initClient() {
-        selectorScreenPacket.receiveOnClient { heroes, _ ->
+        selectorScreenPacket.receiveOnClient { heroIds, _ ->
             mcCoroutineTask(sync = true, client = true) {
-                println("Heroes: $heroes")
+                val heroes = buildList {
+                    for (heroId in heroIds) {
+                        add(HeroManager.getHero(heroId) ?: continue)
+                    }
+                }
                 MinecraftClient.getInstance().setScreen(HeroSelectorScreen(heroes))
             }
         }

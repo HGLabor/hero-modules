@@ -33,7 +33,7 @@ object WorldManager {
     val chunkSize = 1
     val mapSize = 512
     var currentPair = Pair(0, 0)
-    var mapReset = 10L
+    var mapReset = 30 * 60L
     var mapResetTask: Job? = null
     val usedMaps = mutableSetOf<Pair<Int, Int>>()
 

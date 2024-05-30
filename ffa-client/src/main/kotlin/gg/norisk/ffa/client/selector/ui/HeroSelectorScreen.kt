@@ -1,16 +1,15 @@
 package gg.norisk.ffa.client.selector.ui
 
-import gg.norisk.ffa.Heroes
 import gg.norisk.ffa.client.selector.ui.components.HeroInfoComponent
 import gg.norisk.ffa.client.selector.ui.components.HeroListComponent
-import gg.norisk.ffa.network.dto.HeroWrapper
+import gg.norisk.heroes.common.hero.Hero
 import io.wispforest.owo.ui.base.BaseOwoScreen
 import io.wispforest.owo.ui.container.Containers
 import io.wispforest.owo.ui.container.FlowLayout
 import io.wispforest.owo.ui.core.OwoUIAdapter
 import io.wispforest.owo.ui.core.Positioning
 
-class HeroSelectorScreen(val heroes: List<HeroWrapper>) : BaseOwoScreen<FlowLayout>() {
+class HeroSelectorScreen(val heroes: List<Hero<*>>) : BaseOwoScreen<FlowLayout>() {
     var hero = heroes.first()
         set(value) {
             field = value

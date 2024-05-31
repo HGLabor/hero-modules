@@ -1,13 +1,11 @@
-import java.text.SimpleDateFormat
-import java.util.*
-
 plugins {
     fabric
     kotlin
-    silk
+    `noriskclient-publish`
+    kotlin("plugin.serialization")
 }
 
-version = "1.0.0"
+version = "${property("mcVersion")}-1.0.11"
 
 repositories {
     mavenCentral()
@@ -47,23 +45,3 @@ dependencies {
     modImplementation("maven.modrinth:sodium:mc1.20.4-0.5.8")
     modImplementation("maven.modrinth:cloth-config:13.0.121+fabric")
 }
-
-loom {
-    runConfigs.configureEach {
-        this.ideConfigGenerated(true)
-    }
-}
-
-tasks {
-    processResources {
-        val properties = mapOf(
-            "version" to project.version,
-            "buildDate" to SimpleDateFormat("yyyyMMdd").format(Date())
-        )
-        inputs.properties(properties)
-        filesMatching("fabric.mod.json") {
-            expand(properties)
-        }
-    }
-}
-

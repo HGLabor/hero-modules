@@ -12,7 +12,10 @@ tasks {
     }
     compileKotlin {
         kotlinOptions.jvmTarget = "$javaVersion"
-        kotlinOptions.freeCompilerArgs += "-Xjvm-default=all"
+        kotlinOptions {
+            freeCompilerArgs += "-Xcontext-receivers"
+            freeCompilerArgs += "-Xjvm-default=all"
+        }
     }
 }
 
@@ -22,4 +25,9 @@ kotlin {
     sourceSets.all {
         languageSettings.optIn("kotlin.RequiresOptIn")
     }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
 }

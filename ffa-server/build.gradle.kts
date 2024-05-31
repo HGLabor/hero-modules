@@ -8,8 +8,8 @@ plugins {
     `maven-publish`
 }
 
-val mcVersion = "1.20.4"
-version = "$mcVersion-1.0.3"
+val minecraftVersion = "1.20.4"
+version = "$minecraftVersion-1.0.10"
 
 repositories {
     mavenCentral()

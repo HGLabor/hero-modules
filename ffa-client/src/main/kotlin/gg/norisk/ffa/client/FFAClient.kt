@@ -10,7 +10,6 @@ object FFAClient : ClientModInitializer {
     val logger = LogManager.getLogger(modId)
     fun String.toId(): Identifier = Identifier(modId, this)
     override fun onInitializeClient() {
-        println("Hello Client")
         SelectorClientManager.initClient()
     }
 }

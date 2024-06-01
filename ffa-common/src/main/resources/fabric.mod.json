@@ -10,7 +10,7 @@
     "BestAuto"
   ],
   "icon": "assets/ffa-common/icon.png",
-  "license": "MIT",
+  "license": "ARR",
   "environment": "*",
   "entrypoints": {
     "main": [

@@ -32,12 +32,12 @@ repositories {
 dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
     mappings("net.fabricmc:yarn:$minecraftVersion+build.3")
-    modImplementation("net.fabricmc:fabric-loader:0.15.3")
+    modImplementation("net.fabricmc:fabric-loader:0.15.11")
     modImplementation("net.fabricmc.fabric-api:fabric-api:0.91.3+$minecraftVersion")
     modImplementation("net.fabricmc:fabric-language-kotlin:1.10.16+kotlin.1.9.21")
     //HERO STUFF
-    modImplementation("gg.norisk:hero-api:$minecraftVersion-1.0.72-SNAPSHOT")
-    modImplementation("gg.norisk:darthvader:$minecraftVersion-1.0.0")
+    modImplementation("gg.norisk:hero-api:$minecraftVersion-1.1.3")
+    modImplementation("gg.norisk:darthvader:$minecraftVersion-1.1.9")
     modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:1.0.2-rc1+1.20")
 
     val silkVersion = "1.10.3"
@@ -58,12 +58,6 @@ tasks {
         filesMatching("fabric.mod.json") {
             expand(properties)
         }
-    }
-}
-
-loom {
-    runConfigs.configureEach {
-        this.ideConfigGenerated(true)
     }
 }
 

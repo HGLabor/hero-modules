@@ -1,7 +1,6 @@
 plugins {
     fabric
     kotlin
-    `hglabor-publish`
     kotlin("plugin.serialization")
 }
 

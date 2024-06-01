@@ -23,6 +23,7 @@
   "mixins": [
     "ffa-server.mixins.json"
   ],
+  "accessWidener": "ffa-server.accesswidener",
   "depends": {
     "java": ">=17",
     "minecraft": "*",

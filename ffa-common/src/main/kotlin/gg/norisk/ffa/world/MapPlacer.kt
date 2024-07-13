@@ -30,7 +30,7 @@ object MapPlacer {
 
     private fun generateMap(world: World) {
         val size = chunkSize * mapSize
-        val file = File("config/worldedit/schematics/ffa_v3_512x.schem")
+        val file = File(FabricLoader.getInstance().configDir.parent.parent.parent.toFile(), "assets/ffa-13-07-2024.schem")
         if (!file.exists()) {
             logger.error("${file.name} doesn't exist")
             return

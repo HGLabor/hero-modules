@@ -36,7 +36,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:0.91.3+$minecraftVersion")
     modImplementation("net.fabricmc:fabric-language-kotlin:1.10.16+kotlin.1.9.21")
     //HERO STUFF
-    modImplementation("gg.norisk:hero-api:$minecraftVersion-1.1.3")
+    modImplementation("gg.norisk:hero-api:$minecraftVersion-1.1.4")
     modImplementation("gg.norisk:darthvader:$minecraftVersion-1.1.9")
     modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:1.0.2-rc1+1.20")
 

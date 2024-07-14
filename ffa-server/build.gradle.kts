@@ -1,26 +1,14 @@
-import java.text.SimpleDateFormat
-import java.util.*
-
 plugins {
     fabric
     kotlin
-    silk
     `maven-publish`
+    kotlin("plugin.serialization")
 }
 
-val mcVersion = "1.20.4"
-version = "$mcVersion-1.0.3"
-
-repositories {
-    mavenCentral()
-    maven("https://maven.wispforest.io")
-    maven("https://maven.enginehub.org/repo/")
-}
+version = "${property("mcVersion")}-1.1.3"
 
 dependencies {
     include(implementation(project(":ffa-common", configuration = "namedElements"))!!)
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
-    modImplementation("com.sk89q.worldedit:worldedit-fabric-mc1.20.4:7.3.0") // Ändere die Versionsnummer entsprechend der gewünschten Version
 }
 
 loom {
@@ -30,19 +18,6 @@ loom {
     accessWidenerPath.set(file("src/main/resources/ffa-server.accesswidener"))
 }
 
-tasks {
-    processResources {
-        val properties = mapOf(
-            "version" to project.version,
-            "buildDate" to SimpleDateFormat("yyyyMMdd").format(Date())
-        )
-        inputs.properties(properties)
-        filesMatching("fabric.mod.json") {
-            expand(properties)
-        }
-    }
-}
-
 val sourceJar = tasks.register<Jar>("sourceJar") {
     archiveClassifier.set("sources")
     from(sourceSets.main.get().allSource)
@@ -50,7 +25,13 @@ val sourceJar = tasks.register<Jar>("sourceJar") {
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
+        create<MavenPublication>("binary") {
+            groupId = "gg.norisk"
+            artifactId = "ffa-server"
+            version = project.version.toString()
+            from(components["java"])
+        }
+        create<MavenPublication>("binaryAndSources") {
             groupId = "gg.norisk"
             artifactId = "ffa-server"
             version = project.version.toString()
@@ -59,21 +40,47 @@ publishing {
         }
     }
     repositories {
+        fun MavenArtifactRepository.applyCredentials() = credentials {
+            username = (System.getenv("NORISK_NEXUS_USERNAME") ?: project.findProperty("noriskMavenUsername")).toString()
+            password = (System.getenv("NORISK_NEXUS_PASSWORD") ?: project.findProperty("noriskMavenPassword")).toString()
+        }
         maven {
-            val releasesRepoUrl = uri("https://maven.norisk.gg/repository/maven-releases/")
-            val snapshotsRepoUrl = uri("https://maven.norisk.gg/repository/maven-snapshots/")
-            val nexusUsername = System.getenv("NORISK_NEXUS_USERNAME") ?: project.findProperty("noriskMavenUsername") ?: ""
-            val nexusPassword = System.getenv("NORISK_NEXUS_PASSWORD") ?: project.findProperty("noriskMavenPassword") ?: ""
-
-            name = "nexus"
-            url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
-            credentials {
-                username = nexusUsername.toString()
-                password = nexusPassword.toString()
-            }
+            name = "production"
+            url = uri("https://maven.norisk.gg/repository/norisk-production/")
+            applyCredentials()
+        }
+        maven {
+            name = "dev"
+            // this could also be a maven repo on the dev server
+            // e.g. maven-staging.norisk.gg
+            url = uri("https://maven.norisk.gg/repository/maven-releases/")
+            applyCredentials()
         }
     }
 }
+
+tasks.withType<PublishToMavenRepository>().configureEach {
+    val predicate = provider {
+        (repository == publishing.repositories["production"] &&
+                publication == publishing.publications["binary"]) ||
+                (repository == publishing.repositories["dev"] &&
+                        publication == publishing.publications["binaryAndSources"])
+    }
+    onlyIf("publishing binary to the production repository, or binary and sources to the internal dev one") {
+        predicate.get()
+    }
+}
+
+tasks.withType<PublishToMavenLocal>().configureEach {
+    val predicate = provider {
+        publication == publishing.publications["binaryAndSources"]
+    }
+    onlyIf("publishing binary and sources") {
+        predicate.get()
+    }
+}
+
+
 
 
 

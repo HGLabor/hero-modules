@@ -1,7 +1,6 @@
-val kotlinVersion = "1.9.21"
-
 plugins {
     `kotlin-dsl`
+    kotlin("plugin.serialization") version embeddedKotlinVersion
 }
 
 repositories {
@@ -12,10 +11,14 @@ repositories {
 
 dependencies {
     fun pluginDep(id: String, version: String) = "${id}:${id}.gradle.plugin:${version}"
+    val kotlinVersion = "1.9.23"
 
-    implementation(kotlin("gradle-plugin", kotlinVersion))
-    implementation(kotlin("serialization", kotlinVersion))
+    compileOnly(kotlin("gradle-plugin", embeddedKotlinVersion))
+    runtimeOnly(kotlin("gradle-plugin", kotlinVersion))
+    compileOnly(pluginDep("org.jetbrains.kotlin.plugin.serialization", embeddedKotlinVersion))
+    runtimeOnly(pluginDep("org.jetbrains.kotlin.plugin.serialization", kotlinVersion))
 
-    implementation(pluginDep("fabric-loom", "1.5-SNAPSHOT"))
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation(pluginDep("fabric-loom", "1.6-SNAPSHOT"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }

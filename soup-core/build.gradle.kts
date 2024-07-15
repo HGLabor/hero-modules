@@ -4,7 +4,6 @@ import java.util.*
 plugins {
     fabric
     kotlin
-    silk
     `maven-publish`
 }
 

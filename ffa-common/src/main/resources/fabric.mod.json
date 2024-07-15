@@ -28,5 +28,15 @@
     "minecraft": "*",
     "fabric": "*",
     "fabric-language-kotlin": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "badges": [
+        "library"
+      ],
+      "parent": {
+        "id": "noriskclient"
+      }
+    }
   }
 }

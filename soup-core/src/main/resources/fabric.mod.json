@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "name": "SoupCore",
+  "id": "soupcore",
+  "version": "${version}",
+  "description": "A HGLabor mod that adds the functionality for soups",
+  "authors": [
+    "NoRiskk",
+    "BestAuto"
+  ],
+  "icon": "assets/soupcore/icon.png",
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "gg.norisk.soupcore.SoupCore"
+      }
+    ]
+  },
+  "mixins": [
+    "soupcore.mixins.json"
+  ],
+  "depends": {
+    "java": ">=17",
+    "minecraft": "*",
+    "fabric": "*",
+    "fabric-language-kotlin": "*"
+  }
+}

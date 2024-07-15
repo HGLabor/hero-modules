@@ -5,7 +5,7 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "${property("mcVersion")}-1.1.2"
+version = "${property("mcVersion")}-1.1.3"
 
 repositories {
     mavenCentral()

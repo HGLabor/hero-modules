@@ -44,6 +44,8 @@ dependencies {
     modImplementation("maven.modrinth:auth-me:8.0.0+1.20.4")
     modImplementation("maven.modrinth:sodium:mc1.20.4-0.5.8")
     modImplementation("maven.modrinth:cloth-config:13.0.121+fabric")
+    modImplementation("maven.modrinth:replaymod:1.20.4-2.6.15")
+    modImplementation("maven.modrinth:nvidium:0.2.6-beta")
 }
 
 val sourceJar = tasks.register<Jar>("sourceJar") {

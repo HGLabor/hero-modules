@@ -8,6 +8,8 @@ import io.wispforest.owo.ui.container.Containers
 import io.wispforest.owo.ui.container.FlowLayout
 import io.wispforest.owo.ui.core.OwoUIAdapter
 import io.wispforest.owo.ui.core.Positioning
+import me.cortex.nvidium.Nvidium
+import net.fabricmc.loader.api.FabricLoader
 
 class HeroSelectorScreen(val heroes: List<Hero<*>>) : BaseOwoScreen<FlowLayout>() {
     var hero = heroes.first()
@@ -23,12 +25,25 @@ class HeroSelectorScreen(val heroes: List<Hero<*>>) : BaseOwoScreen<FlowLayout>(
         return OwoUIAdapter.create(this, Containers::verticalFlow);
     }
 
+    override fun close() {
+        super.close()
+        if (FabricLoader.getInstance().isModLoaded("nvidium")) {
+            Nvidium.FORCE_DISABLE = false
+            this.client?.worldRenderer?.reload()
+        }
+    }
+
     override fun build(root: FlowLayout) {
         val heroList = HeroListComponent(heroes, this)
         heroList.positioning(Positioning.relative(50, 90))
 
         root.child(heroList)
         root.child(heroInfoComponent)
+
+        if (FabricLoader.getInstance().isModLoaded("nvidium")) {
+            Nvidium.FORCE_DISABLE = true
+            this.client?.worldRenderer?.reload()
+        }
     }
 
     override fun shouldPause(): Boolean {
@@ -36,6 +51,6 @@ class HeroSelectorScreen(val heroes: List<Hero<*>>) : BaseOwoScreen<FlowLayout>(
     }
 
     override fun shouldCloseOnEsc(): Boolean {
-        return false
+        return FabricLoader.getInstance().isDevelopmentEnvironment
     }
 }

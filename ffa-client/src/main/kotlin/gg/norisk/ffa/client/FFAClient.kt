@@ -1,5 +1,6 @@
 package gg.norisk.ffa.client
 
+import gg.norisk.ffa.client.selector.OrthoCamera
 import gg.norisk.ffa.client.selector.SelectorClientManager
 import net.fabricmc.api.ClientModInitializer
 import net.minecraft.util.Identifier
@@ -11,5 +12,6 @@ object FFAClient : ClientModInitializer {
     fun String.toId(): Identifier = Identifier(modId, this)
     override fun onInitializeClient() {
         SelectorClientManager.initClient()
+        OrthoCamera.initClient()
     }
 }

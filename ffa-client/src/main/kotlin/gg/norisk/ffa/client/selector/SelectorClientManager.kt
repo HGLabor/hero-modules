@@ -14,16 +14,10 @@ object SelectorClientManager {
     fun initClient() {
         selectorScreenPacket.receiveOnClient { heroIds, _ ->
             mcCoroutineTask(sync = true, client = true) {
-                val heroes = buildList {
-                    for (heroId in heroIds) {
-                        add(HeroManager.getHero(heroId) ?: continue)
-                    }
-                }
-                MinecraftClient.getInstance().setScreen(HeroSelectorScreen(heroes))
+                openHeroScreen(heroIds)
             }
         }
         syncedValueChangeEvent.listen { event ->
-            println("Das kommt rein ${event.toString()}")
             val player = event.entity as? PlayerEntity ?: return@listen
             if (player != MinecraftClient.getInstance().player) return@listen
 
@@ -35,5 +29,14 @@ object SelectorClientManager {
                 }
             }
         }
+    }
+
+    fun openHeroScreen(heroIds: List<String>) {
+        val heroes = buildList {
+            for (heroId in heroIds) {
+                add(HeroManager.getHero(heroId) ?: continue)
+            }
+        }
+        MinecraftClient.getInstance().setScreen(HeroSelectorScreen(heroes))
     }
 }

@@ -2,6 +2,7 @@ package gg.norisk.ffa.client.selector
 
 import gg.norisk.ffa.utils.Animation
 import gg.norisk.ffa.client.selector.ui.HeroSelectorScreen
+import gg.norisk.heroes.common.hero.HeroManager
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
@@ -22,10 +23,10 @@ object OrthoCamera : ClientTickEvents.EndTick {
 
     fun initClient() {
         if (FabricLoader.getInstance().isDevelopmentEnvironment) {
-            clientCommand("hero") {
+            clientCommand("heroscreen") {
                 runs {
                     mcCoroutineTask(delay = 1.ticks, sync = true, client = true) {
-                        //MinecraftClient.getInstance().setScreen(HeroSelectorScreen())
+                        MinecraftClient.getInstance().setScreen(HeroSelectorScreen(HeroManager.registeredHeroes.values.toList()))
                     }
                 }
             }

@@ -19,12 +19,14 @@ import net.silkmc.silk.core.text.literal
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.math.absoluteValue
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.seconds
 
 object WorldManager {
     var currentPair = Pair(0, 0)
     var mapReset = 30 * 60L
     var mapResetTask: Job? = null
     val usedMaps = mutableSetOf<Pair<Int, Int>>()
+    val maxCount get() =  (-chunkSize..chunkSize).count()
 
     fun mapResetCycle() {
         currentPair = getFreeMapPos()
@@ -35,8 +37,11 @@ object WorldManager {
             if (players.isEmpty()) {
                 return@infiniteMcCoroutineTask
             }
-            for (player in players) {
-                player.sendMessage("MAP CHANGE IN ${counter.getAndDecrement()} $currentPair".literal, true)
+            counter.decrementAndGet()
+            if (counter.get() < 300) {
+                for (player in players) {
+                    player.sendMessage("Map Reset ${counter.getTimeAsString()}".literal, true)
+                }
             }
             if (counter.get() == 0L) {
                 usedMaps.add(currentPair)
@@ -47,6 +52,17 @@ object WorldManager {
                 setWorldBorder(server!!.overworld)
             }
         }
+    }
+
+    private fun AtomicLong.getTimeAsString(): String {
+        val builder = StringBuilder()
+        get().seconds.toComponents { days, hours, minutes, seconds, _ ->
+            if (days > 0) builder.append(days).append("d ")
+            if (hours > 0) builder.append(hours).append("h ")
+            if (minutes > 0) builder.append(minutes).append("m ")
+            builder.append(seconds).append("s")
+        }
+        return builder.toString()
     }
 
     fun setWorldBorder(world: World) {
@@ -62,6 +78,12 @@ object WorldManager {
             Random.nextInt(-chunkSize, chunkSize + 1),
             Random.nextInt(-chunkSize, chunkSize + 1)
         )
+
+        //TODO bypass für volle map sollte aber eig nicht passieren da große map
+        if (usedMaps.size == maxCount) {
+            return pair
+        }
+
         return if (usedMaps.contains(pair)) {
             getFreeMapPos()
         } else {

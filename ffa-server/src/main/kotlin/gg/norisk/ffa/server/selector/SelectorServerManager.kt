@@ -13,7 +13,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.world.GameMode
-import net.silkmc.silk.core.text.literal
 
 object SelectorServerManager : ServerEntityEvents.Load {
     fun initServer() {
@@ -23,10 +22,8 @@ object SelectorServerManager : ServerEntityEvents.Load {
             player.changeGameMode(GameMode.SURVIVAL)
             player.isFFA = true
             val spawn = server.overworld.findSpawnLocation().toCenterPos()
-            player.sendMessage("Du bist jetzt $heroId $spawn OK".literal)
             player.teleport(server.overworld, spawn.x, spawn.y, spawn.z, 0f, 0f)
             val hero = HeroManager.getHero(heroId)
-            println("Hero: ${hero?.name} Found Hero")
             player.setHero(hero)
         }
         ServerLivingEntityEvents.ALLOW_DEATH.register { entity, _, _ ->
@@ -48,6 +45,7 @@ object SelectorServerManager : ServerEntityEvents.Load {
         this.health = this.maxHealth
         isFFA = false
         changeGameMode(GameMode.SPECTATOR)
+        setHero(null)
         selectorScreenPacket.send(HeroManager.registeredHeroes.keys.toList(), this)
         val spawn = server.overworld.getCenter().toCenterPos()
         this.teleport(server.overworld, spawn.x, spawn.y, spawn.z, 0f, 0f)

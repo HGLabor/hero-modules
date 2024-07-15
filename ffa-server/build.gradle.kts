@@ -5,7 +5,7 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "${property("mcVersion")}-1.1.3"
+version = "${property("mcVersion")}-1.1.4"
 
 dependencies {
     include(implementation(project(":ffa-common", configuration = "namedElements"))!!)

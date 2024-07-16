@@ -8,9 +8,17 @@
   },
   "client": [
     "CameraMixin",
+    "ClientChunkManagerMixin",
+    "ClientPlayNetworkHandlerMixin",
     "GameOptionsMixin",
     "GameRendererMixin",
     "InGameHudMixin",
+    "WorldRendererAccessor",
+    "WorldRendererMixin",
     "sodium.DefaultChunkRendererMixin"
+  ],
+  "mixins": [
+    "ChunkSectionMixin",
+    "WorldChunkMixin"
   ]
 }

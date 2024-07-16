@@ -10,6 +10,8 @@ import gg.norisk.heroes.common.hero.setHero
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
 import net.minecraft.entity.Entity
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.world.GameMode
@@ -25,6 +27,7 @@ object SelectorServerManager : ServerEntityEvents.Load {
             player.teleport(server.overworld, spawn.x, spawn.y, spawn.z, 0f, 0f)
             val hero = HeroManager.getHero(heroId)
             player.setHero(hero)
+            player.giveItemStack(ItemStack(Items.PIG_SPAWN_EGG, 64))
         }
         ServerLivingEntityEvents.ALLOW_DEATH.register { entity, _, _ ->
             val player = entity as? ServerPlayerEntity ?: return@register true

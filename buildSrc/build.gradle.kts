@@ -18,7 +18,7 @@ dependencies {
     compileOnly(pluginDep("org.jetbrains.kotlin.plugin.serialization", embeddedKotlinVersion))
     runtimeOnly(pluginDep("org.jetbrains.kotlin.plugin.serialization", kotlinVersion))
 
-    implementation(pluginDep("fabric-loom", "1.6-SNAPSHOT"))
+    implementation(pluginDep("fabric-loom", "1.7-SNAPSHOT"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 }

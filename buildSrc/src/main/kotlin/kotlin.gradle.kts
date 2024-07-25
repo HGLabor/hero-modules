@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-val javaVersion = 17
+val javaVersion = 21
 
 tasks {
     compileJava {

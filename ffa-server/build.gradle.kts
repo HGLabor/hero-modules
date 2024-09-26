@@ -6,9 +6,15 @@ plugins {
 }
 
 version = "${property("mcVersion")}-1.1.5"
+val worldEditVersion: String by project
+
+repositories {
+    maven("https://maven.enginehub.org/repo/")
+}
 
 dependencies {
     include(implementation(project(":ffa-common", configuration = "namedElements"))!!)
+    modCompileOnly("com.sk89q.worldedit:worldedit-fabric-mc:$worldEditVersion") // Ändere die Versionsnummer entsprechend der gewünschten Version
 }
 
 loom {

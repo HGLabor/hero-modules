@@ -7,10 +7,14 @@ repositories {
     mavenCentral()
     gradlePluginPortal()
     maven("https://maven.fabricmc.net/")
+    maven("https://maven.quiltmc.org/repository/release")
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
     fun pluginDep(id: String, version: String) = "${id}:${id}.gradle.plugin:${version}"
+
+    //erst updaten wenn man im datatracker den serializaiton bug fixed
     val kotlinVersion = "1.9.23"
 
     compileOnly(kotlin("gradle-plugin", embeddedKotlinVersion))

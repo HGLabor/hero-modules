@@ -12,5 +12,5 @@ object FFACommon : ModInitializer {
 
     val modId = "ffa-common"
     val logger = LogManager.getLogger(modId)
-    fun String.toId(): Identifier = Identifier(modId, this)
+    fun String.toId(): Identifier = Identifier.of(modId, this)
 }

@@ -37,7 +37,6 @@ object SelectorServerManager {
     private fun ServerPlayerEntity.setSelectorReady() {
         this.health = this.maxHealth
         isFFA = false
-        
         changeGameMode(GameMode.SPECTATOR)
         setHero(null)
         selectorScreenPacket.send(HeroManager.registeredHeroes.keys.toList(), this)

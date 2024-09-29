@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.*
+
 plugins {
     fabric
     kotlin
@@ -6,7 +9,7 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "${BuildConstants.minecraftVersion}-1.1.5"
+version = "${BuildConstants.minecraftVersion}-1.1.6"
 
 repositories {
     mavenCentral()

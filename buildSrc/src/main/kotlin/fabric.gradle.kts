@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.*
+
 plugins {
     kotlin("jvm")
     id("fabric-loom")
@@ -30,4 +33,23 @@ dependencies {
     modImplementation("net.silkmc:silk-core:$silkVersion")
     modImplementation("net.silkmc:silk-network:$silkVersion")
     modImplementation("net.silkmc:silk-nbt:$silkVersion")
+}
+
+tasks {
+    processResources {
+        val properties = mapOf(
+            "version" to project.version,
+            "buildDate" to SimpleDateFormat("yyyyMMdd").format(Date())
+        )
+        inputs.properties(properties)
+        filesMatching("fabric.mod.json") {
+            expand(properties)
+        }
+    }
+    compileKotlin {
+        kotlinOptions {
+            freeCompilerArgs += "-Xcontext-receivers"
+            freeCompilerArgs += "-Xjvm-default=all"
+        }
+    }
 }

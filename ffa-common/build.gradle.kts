@@ -4,4 +4,4 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "${property("mcVersion")}-1.0.1"
+version = "${BuildConstants.minecraftVersion}-1.0.1"

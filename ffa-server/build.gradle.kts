@@ -5,8 +5,7 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "${property("mcVersion")}-1.1.5"
-val worldEditVersion: String by project
+version = "${BuildConstants.minecraftVersion}-1.1.5"
 
 repositories {
     maven("https://maven.enginehub.org/repo/")
@@ -14,7 +13,7 @@ repositories {
 
 dependencies {
     include(implementation(project(":ffa-common", configuration = "namedElements"))!!)
-    modCompileOnly("com.sk89q.worldedit:worldedit-fabric-mc:$worldEditVersion") // Ändere die Versionsnummer entsprechend der gewünschten Version
+    modCompileOnly("com.sk89q.worldedit:worldedit-fabric-mc${BuildConstants.worldeditVersion}") // Ändere die Versionsnummer entsprechend der gewünschten Version
 }
 
 loom {

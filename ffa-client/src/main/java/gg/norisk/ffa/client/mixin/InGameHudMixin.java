@@ -9,7 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin {
-    @ModifyExpressionValue(
+    // TODO keine ahnung man
+   /* @ModifyExpressionValue(
             method = "render",
             at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z")
     )
@@ -19,5 +20,5 @@ public abstract class InGameHudMixin {
         } else {
             return original;
         }
-    }
+    }*/
 }

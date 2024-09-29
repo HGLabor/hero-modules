@@ -1,8 +1,7 @@
 package gg.norisk.ffa.server.world
 
-import gg.norisk.ffa.world.MapPlacer
-import gg.norisk.ffa.world.MapPlacer.chunkSize
-import gg.norisk.ffa.world.MapPlacer.mapSize
+import gg.norisk.ffa.server.world.MapPlacer.chunkSize
+import gg.norisk.ffa.server.world.MapPlacer.mapSize
 import kotlinx.coroutines.Job
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.minecraft.network.packet.s2c.play.PositionFlag
@@ -11,7 +10,10 @@ import net.minecraft.server.network.SpawnLocating
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.silkmc.silk.core.Silk
 import net.silkmc.silk.core.Silk.server
+import net.silkmc.silk.core.event.Events
+import net.silkmc.silk.core.event.Server
 import net.silkmc.silk.core.kotlin.ticks
 import net.silkmc.silk.core.server.players
 import net.silkmc.silk.core.task.infiniteMcCoroutineTask
@@ -92,6 +94,9 @@ object WorldManager {
     }
 
     fun initServer() {
+        Events.Server.postStart.listen { event ->
+            MapPlacer.generateMap(Silk.serverOrThrow.overworld)
+        }
         ServerLifecycleEvents.SERVER_STARTED.register { server ->
             usedMaps.clear()
             mapResetCycle()

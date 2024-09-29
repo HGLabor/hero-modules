@@ -5,7 +5,7 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "${property("mcVersion")}-1.1.4"
+version = "${BuildConstants.minecraftVersion}-1.1.5"
 
 repositories {
     mavenCentral()
@@ -37,15 +37,17 @@ repositories {
 dependencies {
     include(implementation(project(":ffa-common", configuration = "namedElements"))!!)
 
+    modImplementation("gg.norisk:datatracker:${BuildConstants.minecraftVersion}-1.0.7")
+
     //UI
-    modImplementation("io.wispforest:owo-lib:0.12.1-SNAPSHOT")
+    modImplementation("io.wispforest:owo-lib:0.12.14+1.21")
     include(modImplementation("com.thedeanda:lorem:2.2")!!)
     //DEBUG MOD zum einloggen
-    modImplementation("maven.modrinth:auth-me:8.0.0+1.20.4")
-    modImplementation("maven.modrinth:sodium:mc1.20.4-0.5.8")
-    modImplementation("maven.modrinth:cloth-config:13.0.121+fabric")
-    modImplementation("maven.modrinth:replaymod:1.20.4-2.6.15")
-    modImplementation("maven.modrinth:nvidium:0.2.6-beta")
+    modImplementation("maven.modrinth:auth-me:8.0.0+1.21")
+    modImplementation("maven.modrinth:sodium:mc1.21-0.5.11")
+    modImplementation("maven.modrinth:cloth-config:15.0.140+fabric")
+//    modImplementation("maven.modrinth:replaymod:1.21.2.6.19")
+    modImplementation("maven.modrinth:nvidium:0.3.1")
 }
 
 val sourceJar = tasks.register<Jar>("sourceJar") {

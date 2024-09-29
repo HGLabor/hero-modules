@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager
 object FFAClient : ClientModInitializer {
     val modId = "ffa-client"
     val logger = LogManager.getLogger(modId)
-    fun String.toId(): Identifier = Identifier(modId, this)
+    fun String.toId(): Identifier = Identifier.of(modId, this)
     override fun onInitializeClient() {
         SelectorClientManager.initClient()
         OrthoCamera.initClient()

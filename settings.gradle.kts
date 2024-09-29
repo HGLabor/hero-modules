@@ -7,8 +7,7 @@ pluginManagement {
     }
 }
 
-include("ffa-common")
 include("ffa-client")
 include("ffa-server")
-include("soup-core")
+include("ffa-common")
 

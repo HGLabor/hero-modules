@@ -7,8 +7,6 @@ repositories {
     mavenCentral()
     gradlePluginPortal()
     maven("https://maven.fabricmc.net/")
-    maven("https://maven.quiltmc.org/repository/release")
-    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {

@@ -26,8 +26,3 @@ kotlin {
         languageSettings.optIn("kotlin.RequiresOptIn")
     }
 }
-
-java {
-    withSourcesJar()
-    withJavadocJar()
-}

@@ -1,9 +1,9 @@
 package gg.norisk.ffa.client.selector
 
 import gg.norisk.ffa.client.selector.ui.HeroSelectorScreen
-import gg.norisk.ffa.network.FFA_KEY
-import gg.norisk.ffa.network.isFFA
-import gg.norisk.ffa.network.selectorScreenPacket
+import gg.norisk.ffa.network.SelectorPackets.FFA_KEY
+import gg.norisk.ffa.network.SelectorPackets.isFFA
+import gg.norisk.ffa.network.SelectorPackets.selectorScreenPacket
 import gg.norisk.heroes.common.entity.syncedValueChangeEvent
 import gg.norisk.heroes.common.hero.HeroManager
 import net.minecraft.client.MinecraftClient

@@ -1,7 +1,7 @@
 package gg.norisk.ffa.client.selector.ui.components
 
 import gg.norisk.ffa.client.selector.ui.HeroSelectorScreen
-import gg.norisk.ffa.network.selectorHeroPacket
+import gg.norisk.ffa.network.SelectorPackets.selectorHeroPacket
 import gg.norisk.heroes.common.hero.Hero
 import io.wispforest.owo.ui.component.Components
 import io.wispforest.owo.ui.container.Containers

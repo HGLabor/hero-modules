@@ -10,4 +10,5 @@ pluginManagement {
 include("ffa-client")
 include("ffa-server")
 include("ffa-common")
+include("soup-core")
 

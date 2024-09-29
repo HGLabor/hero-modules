@@ -6,6 +6,7 @@ plugins {
 }
 
 version = "${BuildConstants.minecraftVersion}-1.1.5"
+val worldEditVersion: String by project
 
 repositories {
     maven("https://maven.enginehub.org/repo/")
@@ -13,7 +14,7 @@ repositories {
 
 dependencies {
     include(implementation(project(":ffa-common", configuration = "namedElements"))!!)
-    modCompileOnly("com.sk89q.worldedit:worldedit-fabric-mc${BuildConstants.worldeditVersion}") // Ändere die Versionsnummer entsprechend der gewünschten Version
+    modCompileOnly("com.sk89q.worldedit:worldedit-fabric-mc${worldEditVersion}") // Ändere die Versionsnummer entsprechend der gewünschten Version
 }
 
 loom {
@@ -31,14 +32,14 @@ val sourceJar = tasks.register<Jar>("sourceJar") {
 publishing {
     publications {
         create<MavenPublication>("binary") {
-            groupId = "gg.norisk"
-            artifactId = "ffa-server"
+            groupId = project.group.toString()
+            artifactId = project.name
             version = project.version.toString()
             from(components["java"])
         }
         create<MavenPublication>("binaryAndSources") {
-            groupId = "gg.norisk"
-            artifactId = "ffa-server"
+            groupId = project.group.toString()
+            artifactId = project.name
             version = project.version.toString()
             from(components["java"])
             artifact(sourceJar)

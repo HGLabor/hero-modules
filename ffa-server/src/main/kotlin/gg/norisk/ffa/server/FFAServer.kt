@@ -13,6 +13,6 @@ object FFAServer : DedicatedServerModInitializer {
 
     override fun onInitializeServer() {
         SelectorServerManager.initServer()
-        //WorldManager.initServer()
+        WorldManager.initServer()
     }
 }

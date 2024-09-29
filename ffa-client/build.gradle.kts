@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-    include(implementation(project(":ffa-common", configuration = "namedElements"))!!)
+    implementation(project(":ffa-common", configuration = "namedElements"))!!
 
     modImplementation("gg.norisk:datatracker:${BuildConstants.minecraftVersion}-1.0.7")
 
@@ -46,7 +46,7 @@ dependencies {
     modImplementation("maven.modrinth:auth-me:8.0.0+1.21")
     modImplementation("maven.modrinth:sodium:mc1.21-0.5.11")
     modImplementation("maven.modrinth:cloth-config:15.0.140+fabric")
-//    modImplementation("maven.modrinth:replaymod:1.21.2.6.19")
+    //modImplementation("maven.modrinth:replaymod:1.21.2.6.19")
     modImplementation("maven.modrinth:nvidium:0.3.1")
 }
 
@@ -58,14 +58,14 @@ val sourceJar = tasks.register<Jar>("sourceJar") {
 publishing {
     publications {
         create<MavenPublication>("binary") {
-            groupId = "gg.norisk"
-            artifactId = "ffa-client"
+            groupId = project.group.toString()
+            artifactId = project.name
             version = project.version.toString()
             from(components["java"])
         }
         create<MavenPublication>("binaryAndSources") {
-            groupId = "gg.norisk"
-            artifactId = "ffa-client"
+            groupId = project.group.toString()
+            artifactId = project.name
             version = project.version.toString()
             from(components["java"])
             artifact(sourceJar)

@@ -36,8 +36,8 @@ val sourceJar = tasks.register<Jar>("sourceJar") {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "gg.norisk"
-            artifactId = "soupcore"
+            groupId = project.group.toString()
+            artifactId = project.name
             version = project.version.toString()
             from(components["java"])
             artifact(sourceJar)

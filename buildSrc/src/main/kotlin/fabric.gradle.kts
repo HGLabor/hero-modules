@@ -42,11 +42,11 @@ repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${BuildConstants.minecraftVersion}")
-    mappings("net.fabricmc:yarn:${BuildConstants.minecraftVersion}+build.9")
-    modImplementation("net.fabricmc:fabric-loader:0.15.11")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:0.100.7+${BuildConstants.minecraftVersion}")
-    modImplementation("net.fabricmc:fabric-language-kotlin:1.11.0+kotlin.2.0.0")
+    minecraft("com.mojang:minecraft:$mcVersion")
+    mappings("net.fabricmc:yarn:$yarnVersion")
+    modImplementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
+    modImplementation("net.fabricmc:fabric-language-kotlin:$kotlinApiVersion")
 
     modImplementation("gg.norisk:hero-api:1.21-1.2.0")
     modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:$playerAnimatorVersion")

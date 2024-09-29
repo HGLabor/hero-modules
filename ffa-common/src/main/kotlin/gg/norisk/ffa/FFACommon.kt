@@ -1,13 +1,13 @@
 package gg.norisk.ffa
 
-import gg.norisk.ffa.world.MapPlacer
+import gg.norisk.ffa.network.SelectorPackets
 import net.fabricmc.api.ModInitializer
 import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 
 object FFACommon : ModInitializer {
     override fun onInitialize() {
-        MapPlacer.init()
+        SelectorPackets.init()
     }
 
     val modId = "ffa-common"

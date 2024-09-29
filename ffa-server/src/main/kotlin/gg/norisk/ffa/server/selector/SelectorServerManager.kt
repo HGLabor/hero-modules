@@ -1,8 +1,8 @@
 package gg.norisk.ffa.server.selector
 
-import gg.norisk.ffa.network.isFFA
-import gg.norisk.ffa.network.selectorHeroPacket
-import gg.norisk.ffa.network.selectorScreenPacket
+import gg.norisk.ffa.network.SelectorPackets.isFFA
+import gg.norisk.ffa.network.SelectorPackets.selectorHeroPacket
+import gg.norisk.ffa.network.SelectorPackets.selectorScreenPacket
 import gg.norisk.ffa.server.world.WorldManager.findSpawnLocation
 import gg.norisk.ffa.server.world.WorldManager.getCenter
 import gg.norisk.heroes.common.hero.HeroManager

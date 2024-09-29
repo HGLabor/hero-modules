@@ -1,4 +1,4 @@
-package gg.norisk.ffa.world
+package gg.norisk.ffa.server.world
 
 import com.sk89q.worldedit.WorldEdit
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats
@@ -28,7 +28,7 @@ object MapPlacer {
         }
     }
 
-    private fun generateMap(world: World) {
+    fun generateMap(world: World) {
         val size = chunkSize * mapSize
         val file = File(FabricLoader.getInstance().configDir.parent.parent.parent.toFile(), "assets/ffa-13-07-2024.schem")
         if (!file.exists()) {

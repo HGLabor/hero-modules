@@ -21,7 +21,7 @@ public abstract class DefaultChunkRendererMixin extends ShaderChunkRenderer {
             method = "render",
             at = @At(value = "FIELD", target = "Lme/jellysquid/mods/sodium/client/gui/SodiumGameOptions$PerformanceSettings;useBlockFaceCulling:Z")
     )
-    private boolean blockFaceCulling(boolean original) {
+    private boolean ffa$blockFaceCulling(boolean original) {
         return original && !(MinecraftClient.getInstance().currentScreen instanceof HeroSelectorScreen);
     }
 }

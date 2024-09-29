@@ -1,8 +1,8 @@
 package gg.norisk.ffa.network
 
+import gg.norisk.datatracker.entity.getSyncedData
+import gg.norisk.datatracker.entity.setSyncedData
 import gg.norisk.ffa.FFACommon.toId
-import gg.norisk.heroes.common.entity.getSyncedData
-import gg.norisk.heroes.common.entity.setSyncedData
 import net.minecraft.entity.player.PlayerEntity
 import net.silkmc.silk.network.packet.c2sPacket
 import net.silkmc.silk.network.packet.s2cPacket

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(GameOptions.class)
 public abstract class GameOptionsMixin {
     @Inject(method = "getPerspective", at = @At("RETURN"), cancellable = true)
-    private void injected(CallbackInfoReturnable<Perspective> cir) {
+    private void ffa$GetPerspective(CallbackInfoReturnable<Perspective> cir) {
         if (MinecraftClient.getInstance().currentScreen instanceof HeroSelectorScreen) {
             cir.setReturnValue(Perspective.THIRD_PERSON_FRONT);
         }

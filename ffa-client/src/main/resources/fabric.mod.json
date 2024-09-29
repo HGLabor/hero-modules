@@ -11,9 +11,9 @@
   ],
   "icon": "assets/ffa-client/icon.png",
   "license": "ARR",
-  "environment": "client",
+  "environment": "*",
   "entrypoints": {
-    "client": [
+    "main": [
       {
         "adapter": "kotlin",
         "value": "gg.norisk.ffa.client.FFAClient"

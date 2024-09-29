@@ -11,12 +11,12 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class CameraMixin {
 
     @ModifyVariable(method = "moveBy", at = @At("HEAD"), index = 1, argsOnly = true)
-    private float moveByHeadX(float value) {
+    private float ffa$moveByHeadX(float value) {
         return OrthoCamera.INSTANCE.isEnabled() ? 0.0f : value;
     }
 
     @ModifyVariable(method = "moveBy", at = @At("HEAD"), index = 3, argsOnly = true)
-    private float moveByHeadZ(float value) {
+    private float ffa$moveByHeadZ(float value) {
         return OrthoCamera.INSTANCE.isEnabled() ? 0.0f : value;
     }
 }

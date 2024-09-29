@@ -11,5 +11,5 @@ object SoupCore : ModInitializer {
     }
 
     val modId = "soupcore"
-    fun String.toId(): Identifier = Identifier(modId, this)
+    fun String.toId(): Identifier = Identifier.of(modId, this)
 }

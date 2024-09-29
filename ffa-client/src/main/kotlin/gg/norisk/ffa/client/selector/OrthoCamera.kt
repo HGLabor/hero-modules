@@ -6,6 +6,7 @@ import gg.norisk.heroes.common.hero.HeroManager
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
+import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.RotationAxis
 import net.silkmc.silk.commands.clientCommand
 import net.silkmc.silk.core.kotlin.ticks
@@ -46,15 +47,15 @@ object OrthoCamera : ClientTickEvents.EndTick {
         )
     }
 
-    fun handlePitch(quaternion: Quaternionf, tickDelta: Float): Quaternionf {
-        return RotationAxis.POSITIVE_X.rotationDegrees(30f)
+    fun handlePitch(quaternion: Quaternionf, tickDelta: Float): Float {
+        return 30f * MathHelper.RADIANS_PER_DEGREE
     }
 
-    fun handleYaw(quaternion: Quaternionf, tickDelta: Float): Quaternionf {
+    fun handleYaw(quaternion: Quaternionf, tickDelta: Float): Float {
         if (yawAnimation.isDone) {
             yawAnimation.reset()
         }
-        return RotationAxis.POSITIVE_Y.rotationDegrees(yawAnimation.get())
+        return yawAnimation.get() * MathHelper.RADIANS_PER_DEGREE
     }
 
     override fun onEndTick(client: MinecraftClient) {

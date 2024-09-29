@@ -17,28 +17,6 @@ repositories {
     maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
     maven("https://maven.wispforest.io")
     maven("https://maven.kosmx.dev/")
-
-    maven {
-        url = uri("https://maven.norisk.gg/repository/norisk-production/")
-        credentials {
-            username = (System.getenv("NORISK_NEXUS_USERNAME") ?: project.findProperty("noriskMavenUsername") ?: "").toString()
-            password = (System.getenv("NORISK_NEXUS_PASSWORD") ?: project.findProperty("noriskMavenPassword") ?: "").toString()
-        }
-    }
-    maven {
-        url = uri("https://maven.norisk.gg/repository/maven-releases/")
-        credentials {
-            username = (System.getenv("NORISK_NEXUS_USERNAME") ?: project.findProperty("noriskMavenUsername") ?: "").toString()
-            password = (System.getenv("NORISK_NEXUS_PASSWORD") ?: project.findProperty("noriskMavenPassword") ?: "").toString()
-        }
-    }
-    maven {
-        url = uri("https://maven.norisk.gg/repository/maven-snapshots/")
-        credentials {
-            username = (System.getenv("NORISK_NEXUS_USERNAME") ?: project.findProperty("noriskMavenUsername") ?: "").toString()
-            password = (System.getenv("NORISK_NEXUS_PASSWORD") ?: project.findProperty("noriskMavenPassword") ?: "").toString()
-        }
-    }
 }
 
 dependencies {
@@ -47,10 +25,6 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
     modImplementation("net.fabricmc:fabric-language-kotlin:$kotlinApiVersion")
-
-    modImplementation("gg.norisk:hero-api:1.21-1.2.0")
-    modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:$playerAnimatorVersion")
-
 
     modImplementation("net.silkmc:silk-commands:$silkVersion")
     modImplementation("net.silkmc:silk-core:$silkVersion")

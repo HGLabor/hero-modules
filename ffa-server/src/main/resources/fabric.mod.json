@@ -11,9 +11,9 @@
   ],
   "icon": "assets/ffa-server/icon.png",
   "license": "ARR",
-  "environment": "server",
+  "environment": "*",
   "entrypoints": {
-    "server": [
+    "main": [
       {
         "adapter": "kotlin",
         "value": "gg.norisk.ffa.server.FFAServer"
@@ -25,9 +25,5 @@
   ],
   "accessWidener": "ffa-server.accesswidener",
   "depends": {
-    "java": ">=17",
-    "minecraft": "*",
-    "fabric": "*",
-    "fabric-language-kotlin": "*"
   }
 }

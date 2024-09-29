@@ -1,6 +1,7 @@
 plugins {
     fabric
     kotlin
+    heroes
     `maven-publish`
     kotlin("plugin.serialization")
 }
@@ -36,9 +37,6 @@ repositories {
 
 dependencies {
     implementation(project(":ffa-common", configuration = "namedElements"))!!
-
-    modImplementation("gg.norisk:datatracker:${BuildConstants.minecraftVersion}-1.0.7")
-
     //UI
     modImplementation("io.wispforest:owo-lib:0.12.14+1.21")
     include(modImplementation("com.thedeanda:lorem:2.2")!!)
@@ -48,6 +46,12 @@ dependencies {
     modImplementation("maven.modrinth:cloth-config:15.0.140+fabric")
     //modImplementation("maven.modrinth:replaymod:1.21.2.6.19")
     modImplementation("maven.modrinth:nvidium:0.3.1")
+
+    //Das hier ist hart ungeil eig sollte das ein buildskript sein aber er findet es dann nciht???
+    //the mods should work with this!
+    modImplementation("maven.modrinth:iris:1.7.3+1.21")
+    modImplementation("maven.modrinth:sodium:mc1.21-0.5.11")
+    modImplementation("maven.modrinth:nvidium:0.2.9-beta")
 }
 
 val sourceJar = tasks.register<Jar>("sourceJar") {

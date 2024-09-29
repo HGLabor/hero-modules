@@ -1,6 +1,7 @@
 plugins {
     fabric
     kotlin
+    heroes
     `maven-publish`
     kotlin("plugin.serialization")
 }
@@ -10,11 +11,26 @@ val worldEditVersion: String by project
 
 repositories {
     maven("https://maven.enginehub.org/repo/")
+    exclusiveContent {
+        forRepository {
+            maven("https://api.modrinth.com/maven")
+        }
+        filter {
+            includeGroup("maven.modrinth")
+        }
+    }
 }
 
 dependencies {
-    include(implementation(project(":ffa-common", configuration = "namedElements"))!!)
+    implementation(project(":ffa-common", configuration = "namedElements"))
+    implementation(project(":ffa-client", configuration = "namedElements"))
+
+    include(modImplementation("com.thedeanda:lorem:2.2")!!)
     modCompileOnly("com.sk89q.worldedit:worldedit-fabric-mc${worldEditVersion}") // Ändere die Versionsnummer entsprechend der gewünschten Version
+
+    modImplementation("maven.modrinth:iris:1.7.3+1.21")
+    modImplementation("maven.modrinth:sodium:mc1.21-0.5.11")
+    modImplementation("maven.modrinth:nvidium:0.2.9-beta")
 }
 
 loom {
@@ -47,8 +63,10 @@ publishing {
     }
     repositories {
         fun MavenArtifactRepository.applyCredentials() = credentials {
-            username = (System.getenv("NORISK_NEXUS_USERNAME") ?: project.findProperty("noriskMavenUsername")).toString()
-            password = (System.getenv("NORISK_NEXUS_PASSWORD") ?: project.findProperty("noriskMavenPassword")).toString()
+            username =
+                (System.getenv("NORISK_NEXUS_USERNAME") ?: project.findProperty("noriskMavenUsername")).toString()
+            password =
+                (System.getenv("NORISK_NEXUS_PASSWORD") ?: project.findProperty("noriskMavenPassword")).toString()
         }
         maven {
             name = "production"

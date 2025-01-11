@@ -1,17 +1,17 @@
 package gg.norisk.ffa.server.world
 
+import gg.norisk.ffa.server.FFAServer.logger
 import gg.norisk.ffa.server.world.MapPlacer.chunkSize
 import gg.norisk.ffa.server.world.MapPlacer.mapSize
 import kotlinx.coroutines.Job
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.minecraft.network.packet.s2c.play.PositionFlag
+import net.minecraft.server.MinecraftServer
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.network.SpawnLocating
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.silkmc.silk.core.Silk
-import net.silkmc.silk.core.Silk.server
 import net.silkmc.silk.core.event.Events
 import net.silkmc.silk.core.event.Server
 import net.silkmc.silk.core.kotlin.ticks
@@ -28,30 +28,31 @@ object WorldManager {
     var mapReset = 30 * 60L
     var mapResetTask: Job? = null
     val usedMaps = mutableSetOf<Pair<Int, Int>>()
-    val maxCount get() =  (-chunkSize..chunkSize).count()
+    val maxCount get() = (-chunkSize..chunkSize).count()
 
-    fun mapResetCycle() {
+    fun mapResetCycle(server: MinecraftServer) {
         currentPair = getFreeMapPos()
         mapResetTask?.cancel()
         val counter = AtomicLong(mapReset)
-        mapResetTask = infiniteMcCoroutineTask(period = 20.ticks) {
-            val players = server?.players ?: emptyList()
+        mapResetTask = infiniteMcCoroutineTask(period = 20.ticks, sync = true, client = false) {
+            val players = server.playerManager.playerList
             if (players.isEmpty()) {
                 return@infiniteMcCoroutineTask
             }
+            logger.info("Map Reset In: ${counter.get()}")
             counter.decrementAndGet()
-            if (counter.get() < 300) {
+            //if (counter.get() < 300) {
                 for (player in players) {
                     player.sendMessage("Map Reset ${counter.getTimeAsString()}".literal, true)
                 }
-            }
+            //}
             if (counter.get() == 0L) {
                 usedMaps.add(currentPair)
-                mapResetCycle()
-                server?.players?.forEach { player ->
+                mapResetCycle(server)
+                server.players.forEach { player ->
                     player.teleportToNewMap(currentPair.first, currentPair.second)
                 }
-                setWorldBorder(server!!.overworld)
+                setWorldBorder(server.overworld)
             }
         }
     }
@@ -95,11 +96,12 @@ object WorldManager {
 
     fun initServer() {
         Events.Server.postStart.listen { event ->
-            MapPlacer.generateMap(Silk.serverOrThrow.overworld)
+            //MapPlacer.generateMap(Silk.serverOrThrow.overworld)
         }
         ServerLifecycleEvents.SERVER_STARTED.register { server ->
+            logger.info("Init Map Reset Cycle...")
             usedMaps.clear()
-            mapResetCycle()
+            mapResetCycle(server)
             setWorldBorder(server.overworld)
         }
     }

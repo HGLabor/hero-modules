@@ -15,6 +15,6 @@ object FFAServer : ModInitializer {
     override fun onInitialize() {
         if (!isServer) return
         SelectorServerManager.initServer()
-        //WorldManager.initServer()
+        WorldManager.initServer()
     }
 }

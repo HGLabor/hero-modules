@@ -6,7 +6,7 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "${BuildConstants.minecraftVersion}-1.1.7"
+version = "${BuildConstants.minecraftVersion}-1.1.21"
 val worldEditVersion: String by project
 
 repositories {

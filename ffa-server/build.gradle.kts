@@ -6,7 +6,7 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "${BuildConstants.minecraftVersion}-1.1.6"
+version = "${BuildConstants.minecraftVersion}-1.1.7"
 val worldEditVersion: String by project
 
 repositories {
@@ -28,9 +28,9 @@ dependencies {
     include(modImplementation("com.thedeanda:lorem:2.2")!!)
     modCompileOnly("com.sk89q.worldedit:worldedit-fabric-mc${worldEditVersion}") // Ändere die Versionsnummer entsprechend der gewünschten Version
 
-    modImplementation("maven.modrinth:iris:1.7.3+1.21")
-    modImplementation("maven.modrinth:sodium:mc1.21-0.5.11")
-    modImplementation("maven.modrinth:nvidium:0.2.9-beta")
+    modCompileOnly("maven.modrinth:iris:1.7.3+1.21")
+    modCompileOnly("maven.modrinth:sodium:mc1.21-0.5.11")
+    modCompileOnly("maven.modrinth:nvidium:0.2.9-beta")
 }
 
 loom {

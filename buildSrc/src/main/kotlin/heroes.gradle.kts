@@ -35,10 +35,10 @@ repositories {
 
 dependencies {
     //HEROES
-    modImplementation("gg.norisk:hero-api:${BuildConstants.minecraftVersion}-1.1.13")
+    modImplementation("gg.norisk:hero-api:${BuildConstants.minecraftVersion}-1.1.15")
     modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:$playerAnimatorVersion")
-    modImplementation("gg.norisk:datatracker:${BuildConstants.minecraftVersion}-1.0.7")
-    modImplementation("gg.norisk:emote-lib:${BuildConstants.minecraftVersion}-1.0.11")
+    modImplementation("gg.norisk:datatracker:${BuildConstants.minecraftVersion}-1.0.8")
+    modImplementation("gg.norisk:emote-lib:${BuildConstants.minecraftVersion}-1.1.11")
     //HEROES TO TEST
-    modImplementation("gg.norisk:aang:${BuildConstants.minecraftVersion}-1.0.15")
+    //modImplementation("gg.norisk:aang:${BuildConstants.minecraftVersion}-1.0.15")
 }

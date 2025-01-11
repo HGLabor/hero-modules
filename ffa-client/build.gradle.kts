@@ -1,6 +1,3 @@
-import java.text.SimpleDateFormat
-import java.util.*
-
 plugins {
     fabric
     kotlin
@@ -41,20 +38,18 @@ repositories {
 dependencies {
     implementation(project(":ffa-common", configuration = "namedElements"))!!
     //UI
-    modImplementation("io.wispforest:owo-lib:0.12.14+1.21")
+    modCompileOnly("io.wispforest:owo-lib:0.12.10+1.21")
     include(modImplementation("com.thedeanda:lorem:2.2")!!)
     //DEBUG MOD zum einloggen
-    modImplementation("maven.modrinth:auth-me:8.0.0+1.21")
-    modImplementation("maven.modrinth:sodium:mc1.21-0.5.11")
-    modImplementation("maven.modrinth:cloth-config:15.0.140+fabric")
+    modCompileOnly("maven.modrinth:auth-me:8.0.0+1.21")
+    modCompileOnly("maven.modrinth:cloth-config:15.0.140+fabric")
     //modImplementation("maven.modrinth:replaymod:1.21.2.6.19")
-    modImplementation("maven.modrinth:nvidium:0.3.1")
 
     //Das hier ist hart ungeil eig sollte das ein buildskript sein aber er findet es dann nciht???
     //the mods should work with this!
-    modImplementation("maven.modrinth:iris:1.7.3+1.21")
-    modImplementation("maven.modrinth:sodium:mc1.21-0.5.11")
-    modImplementation("maven.modrinth:nvidium:0.2.9-beta")
+    modCompileOnly("maven.modrinth:iris:1.7.3+1.21")
+    modCompileOnly("maven.modrinth:sodium:mc1.21-0.5.11")
+    modCompileOnly("maven.modrinth:nvidium:0.2.9-beta")
 }
 
 val sourceJar = tasks.register<Jar>("sourceJar") {

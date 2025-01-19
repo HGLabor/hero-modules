@@ -6,7 +6,7 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "${BuildConstants.minecraftVersion}-1.1.6"
+version = "${BuildConstants.minecraftVersion}-1.1.8"
 
 repositories {
     mavenCentral()

@@ -21,6 +21,7 @@ import net.silkmc.silk.core.text.literal
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.math.absoluteValue
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
 object WorldManager {
@@ -29,22 +30,23 @@ object WorldManager {
     var mapResetTask: Job? = null
     val usedMaps = mutableSetOf<Pair<Int, Int>>()
     val maxCount get() = (-chunkSize..chunkSize).count()
+    val counter = AtomicLong(mapReset)
 
     fun mapResetCycle(server: MinecraftServer) {
         currentPair = getFreeMapPos()
         mapResetTask?.cancel()
-        val counter = AtomicLong(mapReset)
+        counter.set(mapReset)
         mapResetTask = infiniteMcCoroutineTask(period = 20.ticks, sync = true, client = false) {
             val players = server.playerManager.playerList
             if (players.isEmpty()) {
                 return@infiniteMcCoroutineTask
             }
-            logger.info("Map Reset In: ${counter.get()}")
+            //logger.info("Map Reset In: ${counter.get()}")
             counter.decrementAndGet()
             //if (counter.get() < 300) {
-                for (player in players) {
-                    player.sendMessage("Map Reset ${counter.getTimeAsString()}".literal, true)
-                }
+            for (player in players) {
+                player.sendMessage("Map Reset ${counter.getTimeAsString()}".literal, true)
+            }
             //}
             if (counter.get() == 0L) {
                 usedMaps.add(currentPair)
@@ -57,9 +59,9 @@ object WorldManager {
         }
     }
 
-    private fun AtomicLong.getTimeAsString(): String {
+    fun AtomicLong.getTimeAsString(): String {
         val builder = StringBuilder()
-        get().seconds.toComponents { days, hours, minutes, seconds, _ ->
+        get().milliseconds.toComponents { days, hours, minutes, seconds, milliseconds ->
             if (days > 0) builder.append(days).append("d ")
             if (hours > 0) builder.append(hours).append("h ")
             if (minutes > 0) builder.append(minutes).append("m ")

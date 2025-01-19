@@ -33,6 +33,8 @@ dependencies {
     modImplementation("net.silkmc:silk-core:$silkVersion")
     modImplementation("net.silkmc:silk-network:$silkVersion")
     modImplementation("net.silkmc:silk-nbt:$silkVersion")
+    modImplementation("net.silkmc:silk-game:$silkVersion")
+    modImplementation("net.silkmc:silk-igui:$silkVersion")
 }
 
 tasks {

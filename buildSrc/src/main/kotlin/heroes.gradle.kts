@@ -31,14 +31,24 @@ repositories {
             password = (System.getenv("NORISK_NEXUS_PASSWORD") ?: project.findProperty("noriskMavenPassword") ?: "").toString()
         }
     }
+    maven {
+        name = "Ladysnake Mods"
+        url = uri("https://maven.ladysnake.org/releases")
+        content {
+            includeGroup("io.github.ladysnake")
+            includeGroup("org.ladysnake")
+            includeGroupByRegex("dev\\.onyxstudios.*")
+        }
+    }
 }
 
 dependencies {
     //HEROES
-    modImplementation("gg.norisk:hero-api:${BuildConstants.minecraftVersion}-1.1.15")
+    modImplementation("gg.norisk:hero-api:${BuildConstants.minecraftVersion}-1.1.34")
     modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:$playerAnimatorVersion")
     modImplementation("gg.norisk:datatracker:${BuildConstants.minecraftVersion}-1.0.8")
     modImplementation("gg.norisk:emote-lib:${BuildConstants.minecraftVersion}-1.1.11")
+    modApi("io.github.ladysnake:satin:2.0.0")
     //HEROES TO TEST
     //modImplementation("gg.norisk:aang:${BuildConstants.minecraftVersion}-1.0.15")
 }

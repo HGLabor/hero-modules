@@ -1,5 +1,6 @@
 package gg.norisk.ffa.server.world
 
+import gg.norisk.ffa.network.SelectorPackets.isFFA
 import gg.norisk.ffa.server.FFAServer.logger
 import gg.norisk.ffa.server.world.MapPlacer.chunkSize
 import gg.norisk.ffa.server.world.MapPlacer.mapSize
@@ -45,13 +46,15 @@ object WorldManager {
             counter.decrementAndGet()
             //if (counter.get() < 300) {
             for (player in players) {
-                player.sendMessage("Map Reset ${counter.getTimeAsString()}".literal, true)
+                if (player.isFFA) {
+                    player.sendMessage("Map Reset ${counter.getTimeAsString()}".literal, true)
+                }
             }
             //}
             if (counter.get() == 0L) {
                 usedMaps.add(currentPair)
                 mapResetCycle(server)
-                server.players.forEach { player ->
+                server.overworld.players.forEach { player ->
                     player.teleportToNewMap(currentPair.first, currentPair.second)
                 }
                 setWorldBorder(server.overworld)
@@ -61,7 +64,7 @@ object WorldManager {
 
     fun AtomicLong.getTimeAsString(): String {
         val builder = StringBuilder()
-        get().milliseconds.toComponents { days, hours, minutes, seconds, milliseconds ->
+        get().seconds.toComponents { days, hours, minutes, seconds, _ ->
             if (days > 0) builder.append(days).append("d ")
             if (hours > 0) builder.append(hours).append("h ")
             if (minutes > 0) builder.append(minutes).append("m ")

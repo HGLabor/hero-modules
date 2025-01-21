@@ -19,8 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 import kotlin.math.sqrt
 
 object Tracker {
-    val tracker by lazy {
-        itemStack(Items.COMPASS) {
+    val tracker
+        get() = itemStack(Items.COMPASS) {
             setCustomName {
                 text("Tracker") {
                     bold = true
@@ -28,7 +28,7 @@ object Tracker {
                 }
             }
         }
-    }
+
 
     fun onTrackerUse(
         playerEntity: PlayerEntity,

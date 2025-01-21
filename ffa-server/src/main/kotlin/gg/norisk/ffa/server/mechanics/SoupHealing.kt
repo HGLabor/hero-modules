@@ -1,9 +1,11 @@
 package gg.norisk.ffa.server.mechanics
 
+import gg.norisk.heroes.common.db.ExperienceManager
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
@@ -36,7 +38,12 @@ object SoupHealing {
             consumedSoup = true
         }
 
-        if (consumedSoup) cir.returnValue = TypedActionResult.pass(ItemStack(Items.BOWL))
+        if (consumedSoup) {
+            (player as? ServerPlayerEntity?)?.apply {
+                ExperienceManager.addXp(this, ExperienceManager.SOUP_EATEN)
+            }
+            cir.returnValue = TypedActionResult.pass(ItemStack(Items.BOWL))
+        }
     }
 
     private val Item.isStew: Boolean

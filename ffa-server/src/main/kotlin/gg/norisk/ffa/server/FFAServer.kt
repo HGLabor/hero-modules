@@ -1,6 +1,8 @@
 package gg.norisk.ffa.server
 
 import gg.norisk.ffa.FFACommon.isServer
+import gg.norisk.ffa.server.command.KillCommand
+import gg.norisk.ffa.server.mechanics.KitEditor
 import gg.norisk.ffa.server.selector.SelectorServerManager
 import gg.norisk.ffa.server.world.WorldManager
 import net.fabricmc.api.ModInitializer
@@ -16,5 +18,7 @@ object FFAServer : ModInitializer {
         if (!isServer) return
         SelectorServerManager.initServer()
         WorldManager.initServer()
+        KillCommand.init()
+        KitEditor.initServer()
     }
 }

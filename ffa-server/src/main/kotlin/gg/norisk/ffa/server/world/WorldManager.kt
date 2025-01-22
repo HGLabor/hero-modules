@@ -6,23 +6,23 @@ import gg.norisk.ffa.server.world.MapPlacer.chunkSize
 import gg.norisk.ffa.server.world.MapPlacer.mapSize
 import kotlinx.coroutines.Job
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.network.packet.s2c.play.PositionFlag
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.network.SpawnLocating
 import net.minecraft.server.world.ServerWorld
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.silkmc.silk.core.event.Events
 import net.silkmc.silk.core.event.Server
 import net.silkmc.silk.core.kotlin.ticks
-import net.silkmc.silk.core.server.players
 import net.silkmc.silk.core.task.infiniteMcCoroutineTask
 import net.silkmc.silk.core.text.literal
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.math.absoluteValue
 import kotlin.random.Random
-import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
 object WorldManager {
@@ -60,6 +60,10 @@ object WorldManager {
                 setWorldBorder(server.overworld)
             }
         }
+    }
+
+    fun PlayerEntity.isInKitEditorWorld(): Boolean {
+        return this.world.registryKey.value == Identifier.of("hero-api", "kit-editor")
     }
 
     fun AtomicLong.getTimeAsString(): String {
@@ -143,8 +147,9 @@ object WorldManager {
     }
 
     fun ServerWorld.findSpawnLocation(): BlockPos {
-        val xRange = (currentPair.first * mapSize..currentPair.first * mapSize + mapSize)
-        val zRange = (currentPair.second * mapSize..currentPair.second * mapSize + mapSize)
+        val size = mapSize / 4
+        val xRange = (currentPair.first * size..currentPair.first * size + size)
+        val zRange = (currentPair.second * size..currentPair.second * size + size)
         return SpawnLocating.findOverworldSpawn(this, xRange.random(), zRange.random()) ?: this.findSpawnLocation()
     }
 }

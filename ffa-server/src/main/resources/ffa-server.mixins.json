@@ -11,6 +11,8 @@
     "HungerManagerMixin",
     "ItemStackMixin",
     "PlayerEntityMixin",
+    "ServerPlayerEntityMixin",
+    "ServerPlayNetworkHandlerMixin",
     "SwordItemMixin"
   ]
 }

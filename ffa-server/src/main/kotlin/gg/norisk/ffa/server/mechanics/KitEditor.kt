@@ -4,8 +4,11 @@ import gg.norisk.ffa.network.SelectorPackets.isFFA
 import gg.norisk.ffa.server.selector.SelectorServerManager.setSelectorReady
 import gg.norisk.ffa.server.selector.SelectorServerManager.setSoupItems
 import gg.norisk.ffa.server.selector.SelectorServerManager.setUHCItems
+import gg.norisk.ffa.server.world.WorldManager.isInKitEditorWorld
 import gg.norisk.heroes.common.events.HeroEvents
 import gg.norisk.heroes.common.ffa.KitEditorManager
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.AllowDamage
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.network.ServerPlayerEntity
 
@@ -22,6 +25,12 @@ object KitEditor {
                 event.isCancelled.set(true)
             }
         }
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register(AllowDamage { entity, source, amount ->
+            if ((entity as? ServerPlayerEntity?)?.isInKitEditorWorld() == true) {
+                return@AllowDamage false
+            }
+            return@AllowDamage true
+        })
         KitEditorManager.onBack = {
             it.setSelectorReady()
         }

@@ -147,9 +147,8 @@ object WorldManager {
     }
 
     fun ServerWorld.findSpawnLocation(): BlockPos {
-        val size = mapSize / 4
-        val xRange = (currentPair.first * size..currentPair.first * size + size)
-        val zRange = (currentPair.second * size..currentPair.second * size + size)
+        val xRange = (currentPair.first * mapSize..currentPair.first * mapSize + mapSize)
+        val zRange = (currentPair.second * mapSize..currentPair.second * mapSize + mapSize)
         return SpawnLocating.findOverworldSpawn(this, xRange.random(), zRange.random()) ?: this.findSpawnLocation()
     }
 }
